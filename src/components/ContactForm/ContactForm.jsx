@@ -1,8 +1,12 @@
 import { useFormik } from "formik";
+import { useDispatch } from "react-redux";
 import * as Yup from "yup";
+import { addContact } from "../../redux/contactsSlice";
 import styles from "./ContactForm.module.css";
 
-const ContactForm = ({ onAddContact }) => {
+const ContactForm = () => {
+  const dispatch = useDispatch();
+
   const formik = useFormik({
     initialValues: {
       name: "",
@@ -23,7 +27,7 @@ const ContactForm = ({ onAddContact }) => {
         ),
     }),
     onSubmit: (values, { resetForm }) => {
-      onAddContact(values);
+      dispatch(addContact(values));
       resetForm();
     },
   });
